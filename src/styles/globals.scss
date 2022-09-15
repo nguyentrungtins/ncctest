@@ -1,0 +1,280 @@
+// For responsive
+@import "mixin";
+
+// Variables
+$primary: #aaaaaa;
+$secondary: #ffaa1a;
+$primary-text: #ffffff;
+$light-text: #aaaaaa;
+$secondary-text: #dbdbdb;
+$body-bg: #ffffff;
+// Mixins
+@mixin d-flex {
+  display: flex;
+}
+
+@mixin d-flex-column {
+  flex-direction: column;
+}
+@mixin d-flex-row {
+  flex-direction: row;
+}
+
+@mixin d-flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin d-flex-v-center {
+  align-items: center;
+}
+
+@mixin d-flex-h-center {
+  justify-content: center;
+}
+
+@mixin d-flex-h-start {
+  justify-content: start;
+}
+
+@mixin d-flex-between {
+  justify-content: space-between;
+}
+
+@mixin fluid {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin flex-grow {
+  flex-grow: 1;
+}
+
+@mixin drop-shadow {
+  box-shadow: 2px 4px 12px 1px rgba(142, 128, 239, 0.3);
+}
+
+// PLaceholder
+// Reset
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+// Global
+html,
+body,
+.site-wrapper {
+  @include fluid();
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.site-wrapper {
+  @include d-flex();
+  @include fluid();
+  background-color: $body-bg;
+}
+
+.d-flex {
+  @include d-flex();
+}
+
+.align-items-center {
+  @include d-flex-v-center();
+}
+
+/*
+    Components
+*/
+
+// 1. Sidebar
+.sidebar {
+  @include flex-grow();
+  background-color: #191718;
+  position: fixed;
+  height: 100vh;
+  border-right: 1px solid #5c5c5c;
+  transition: all 0.4s ease-in-out;
+  @include breakpoint(sm) {
+    width: 70px;
+  }
+  @include breakpoint(lg) {
+    width: 150px;
+  }
+  .menu {
+    .menu-item {
+      @include d-flex();
+
+      color: $light-text;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.4s ease-in-out;
+      border-top: 1px solid #5c5c5c;
+      border-bottom: 1px solid #5c5c5c;
+
+      &:hover,
+      &.active {
+        background-color: #5c5c5c;
+        color: #ffffff;
+      }
+      //   @media screen and (max-width: 768px) {
+      //     padding: 1em;
+      //     @include d-flex-h-center();
+      //   }
+      @include breakpoint(sm) {
+        @include d-flex-h-center();
+        padding: 1em;
+      }
+      @include breakpoint(lg) {
+        @include d-flex-h-start();
+
+        padding: 1em 3em 1em 1em;
+      }
+    }
+  }
+  .menu-icon {
+    width: 30px;
+    text-align: center;
+    @include breakpoint(sm) {
+      display: block;
+    }
+    @include breakpoint(lg) {
+      display: none;
+    }
+  }
+  .menu-label {
+    padding-left: 10px;
+    @media screen and (max-width: 768px) {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+    }
+    @include breakpoint(sm) {
+      display: none;
+    }
+    @include breakpoint(lg) {
+      display: block;
+    }
+  }
+}
+
+// 2. Main Wrapper
+.main-wrapper {
+  @include flex-grow();
+  @include d-flex();
+  @include d-flex-column();
+  height: 100%;
+}
+
+.site-body {
+  background-color: $body-bg;
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  @include breakpoint(sm) {
+    padding: 20px 10px 20px 80px;
+  }
+  @include breakpoint(lg) {
+    padding: 20px 130px 20px 280px;
+  }
+}
+.logo {
+  @include d-flex();
+  @include d-flex-center();
+  > img {
+    @include breakpoint(sm) {
+      width: 200px;
+    }
+    @include breakpoint(lg) {
+      width: auto;
+    }
+  }
+}
+
+.introduce {
+  @include d-flex();
+  @include d-flex-center();
+  @include d-flex-column();
+  background-color: #efefef;
+  padding: 40px 15%;
+  margin-top: 30px;
+  text-align: center;
+  > h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  > p {
+    font-size: 16px;
+  }
+}
+
+.card {
+  @include d-flex();
+  gap: 50px;
+  margin-top: 40px;
+  @include breakpoint(sm) {
+    @include d-flex-column();
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+  @include breakpoint(lg) {
+    @include d-flex-row();
+  }
+  .card-item {
+    > h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    > p {
+      text-align: start;
+    }
+    > .img {
+      img {
+        float: left;
+      }
+    }
+  }
+}
+
+.footer {
+  @include d-flex();
+  @include d-flex-v-center();
+  position: block;
+  border-top: 1px solid #dedede;
+  padding-left: 130px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 80px;
+  color: #3e3e3e;
+  margin-top: 50px;
+  @include breakpoint(sm) {
+    margin-left: 70px;
+    text-align: center;
+  }
+  @include breakpoint(lg) {
+    margin-left: 150px;
+    text-align: start;
+  }
+}
